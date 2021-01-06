@@ -1,12 +1,22 @@
-{{ partial "header" . }}
+<html>
+    <head>
+        <script language="javascript">
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myObj = JSON.parse(this.responseText);
+                console.log(myObj);
+                var rndTipId = Math.floor(Math.random() * myObj.length) + 1
+                rndTipId = rndTipId - 1
+                var redirectPage = myObj[rndTipId].url
+                window.location.replace(redirectPage)
+            }
+            };
+            xmlhttp.open("GET", "/index.json", true);
+            xmlhttp.send();
+        </script>
+    </head>
+    <body>
 
-<main>
-    <div class="intro">
-        {{ with .Site.Params.profilePic }} <img class="profile" src="{{ . }}"> {{ end }}
-        <h1>{{ .Site.Title }}</h1>
-        <h2>{{ markdownify .Site.Params.Description }}</h2>
-        {{ with .Content }} <div class="homepage-content text-justify">{{ . }}</div> {{ end }}
-    </div>
-</main>
-
-{{ partial "footer" . }}
+    </body>
+</html>

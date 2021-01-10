@@ -1,6 +1,6 @@
-{{ $.Scratch.Add "pageList" slice }}
-{{ range where .Pages ".Params.status" "==" "active" }}
-{{ $relLink := .Permalink | relURL }}
-{{ $.Scratch.Add "pageList" (dict "url" $relLink ) }}
-{{ end }}
+{{- $.Scratch.Add "pageList" slice -}}
+{{- range where .Pages ".Params.status" "==" "active" -}}
+{{- $relLink := .Permalink | relURL -}}
+{{- $.Scratch.Add "pageList" (dict "url" $relLink ) -}}
+{{- end -}}
 {{ $.Scratch.Get "pageList" | jsonify }}
